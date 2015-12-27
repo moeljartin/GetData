@@ -1,0 +1,58 @@
+---
+title: "CodeBook"
+author: "Joel Martin"
+date: "December 27, 2015"
+output: html_document
+---
+
+# Part 1
+## original data files
+The final data set was constructed from the following files:
+
+original                |       description
+------------------------|--------------------------------
+subject_train.txt       |       subjects (numeric, 2-24)
+subject_test.txt        |       subjects (numeric, 1-30)
+y_train.txt             |       activities (numeric, 1-6)
+y_test.txt              |       activities (numberic, 1-6)
+x_train.txt             |       features (7352 observations of 561 variables)
+x_test.txt              |       features (2947 observations of 561 variables)
+
+## construction
+The original files were bound together in the following arrangement:
+
+subject_test.txt        |       y_test.txt      |       x_test.txt
+------------------------|-----------------------|---------------------
+subject_train.txt       |       y_train.txt     |       x_train.txt
+
+The constructed dataset then consists of 10299 observations of 563 variable
+
+# Part 2
+Excel was used to sort out variables with "mean()" or "std()" in their name. A
+.csv file was created with just these variables along with their column indices. 
+This was much easier to do in Excel using Text to Columns and since it can't be 
+done programatically in R anyway, this is the better solution for picking the 
+columns. 
+
+# Part 3
+Rename activities from 1-6 to plain language using dplyr::mutate
+
+# Part 4
+Column names are already using the feature descriptions from features.txt. These
+labels are fairly intuitive, with the following format:
+
+[measurement]-[statistic]-[direction]
+
+The measurement is something technical which I have not attempted to decode. The
+statistic is either mean() or std(). The direction is not present for all 
+variables. 
+
+# Part 5
+Changed "subject" to a factor and then used dplyr::group_by and 
+dplyr::summarize to summarize by subject and activity. 
+
+# Variables
+subject - Factor, 1:30
+activity - Factor
+All others are individual measurements, normalized on [-1,1]. Original units 
+appear were from an accelerometer, so assumed to be m/s^2.

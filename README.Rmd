@@ -1,0 +1,9 @@
+---
+title: "README"
+author: "Joel Martin"
+date: "December 27, 2015"
+output: html_document
+---
+
+There's only one script and it works pretty simply. Assuming the relevant input
+files are saved in the working directory, the script will work on these directly.
